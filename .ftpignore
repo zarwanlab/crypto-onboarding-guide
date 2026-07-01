@@ -2,7 +2,6 @@
 .github/
 .gitignore
 node_modules/
-vendor/
 storage/logs/
 storage/framework/cache/
 storage/framework/sessions/
