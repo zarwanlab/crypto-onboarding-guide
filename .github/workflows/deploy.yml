@@ -22,4 +22,4 @@ jobs:
           port: ${{ secrets.FTP_PORT }}
           protocol: ftp
           local-dir: ./
-          server-dir: ./ai/crypto-onboarding-guide
+          server-dir: ./ai/crypto-onboarding-guide/
