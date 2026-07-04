@@ -425,14 +425,6 @@
                 </div>
             </div>
         </section>
-
-        <!-- History Section -->
-        <section id="history-section" class="mt-12 md:mt-16 space-y-6 fadeInSlide hidden px-4 sm:px-0">
-            <h3 class="text-xl font-black text-slate-900" data-i18n="history_title">Recent Roadmaps</h3>
-            <div id="history-list" class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <!-- History items will be injected here -->
-            </div>
-        </section>
     </main>
 
     <footer class="py-12 text-center">
