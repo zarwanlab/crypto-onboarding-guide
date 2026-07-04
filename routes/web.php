@@ -13,22 +13,13 @@ Route::post('/api/generate-roadmap', function (Request $request) {
     $level = $request->input('level');
     $goal = $request->input('goal');
     $time = $request->input('time');
+    $describesYou = implode(', ', $request->input('describes_you', []));
+    $motivatesYou = implode(', ', $request->input('motivates_you', []));
+    $experience = $request->input('experience');
+    $investmentBudget = $request->input('investment_budget');
     $lang = $request->input('lang', 'en');
 
-    $prompt = "Act as a Senior Crypto & Web3 Educator. Create a highly personalized, professional, and detailed learning roadmap for a user with the following profile:
-    - Knowledge Level: $level
-    - Primary Goal: $goal
-    - Daily Time Commitment: $time
-    - Language: $lang
-    
-    The response MUST be in HTML format (using basic tags like <h3>, <p>, <ul>, <li>). 
-    Include:
-    1. A clear Roadmap title.
-    2. Step-by-step milestones (at least 5 steps).
-    3. Recommended high-quality resources (websites, books, or courses).
-    4. Pro tips for success in the $goal field.
-    
-    IMPORTANT: The entire response MUST be written in the specified language ($lang). If the language is Persian (fa) or Arabic (ar), ensure the tone is professional and natural.";
+    $prompt = "Act as a Senior Crypto & Web3 Educator. Create a highly personalized, professional, and detailed learning roadmap for a user with the following profile:\n    - Knowledge Level: $level\n    - Primary Goal: $goal\n    - Daily Time Commitment: $time\n    - What describes you best: $describesYou\n    - What motivates you: $motivatesYou\n    - Experience: $experience\n    - Investment Budget: $investmentBudget\n    - Language: $lang\n    \n    The response MUST be in HTML format (using basic tags like <h3>, <p>, <ul>, <li>). \n    Include:\n    1. A clear Roadmap title.\n    2. Step-by-step milestones (at least 5 steps).\n    3. Recommended high-quality resources (websites, books, or courses).\n    4. Pro tips for success in the $goal field.\n    \n    IMPORTANT: The entire response MUST be written in the specified language ($lang). If the language is Persian (fa) or Arabic (ar), ensure the tone is professional and natural.";
 
     $baseUrl = env('AI_BASE_URL');
     $token = env('AI_TOKEN');
@@ -57,7 +48,16 @@ Route::post('/api/generate-roadmap', function (Request $request) {
             // Save history to file
             $historyEntry = [
                 'timestamp' => now()->toIso8601String(),
-                'input' => ['level' => $level, 'goal' => $goal, 'time' => $time, 'lang' => $lang],
+                'input' => [
+                    'level' => $level,
+                    'goal' => $goal,
+                    'time' => $time,
+                    'describes_you' => $describesYou,
+                    'motivates_you' => $motivatesYou,
+                    'experience' => $experience,
+                    'investment_budget' => $investmentBudget,
+                    'lang' => $lang
+                ],
                 'output' => $aiResult
             ];
             
